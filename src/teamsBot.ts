@@ -34,7 +34,7 @@ export class TeamsBot extends TeamsActivityHandler {
         if (!points || !recipient || !reason) {
             const cardData: CardData = {
                 title: "Incorrect Input format",
-                body: "The input given is incorrect. Please use the below format.`\n`@APP_NAME @RECEPIENT_NAME (POINTS) for (REASON)",
+                body: "The input given is incorrect. Please use the below format.`\n`@APP_NAME @RECIPIENT_NAME (POINTS) for (REASON)",
             };
             const cardAttachment = CardFactory.adaptiveCard(createCardJson(cardData));
             await context.sendActivity(MessageFactory.attachment(cardAttachment));
@@ -61,8 +61,12 @@ export class TeamsBot extends TeamsActivityHandler {
             await context.sendActivity(MessageFactory.attachment(cardAttachment));
         } catch (error) {
             console.error('Error sending request to API:', error);
-            const errorMessage = "Oops! Something went wrong. Please try again later.";
-            await context.sendActivity(errorMessage);
+            const cardData: CardData = {
+                title: "API request failed",
+                body: "There was an error in API request. Kindly wait and check again.",
+            };
+            const cardAttachment = CardFactory.adaptiveCard(createCardJson(cardData));
+            await context.sendActivity(MessageFactory.attachment(cardAttachment));
         }
     }
 

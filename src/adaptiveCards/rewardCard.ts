@@ -14,7 +14,7 @@ export function createCardJson(cardData: CardData): any {
                 type: "TextBlock",
                 text: cardData.body,
                 wrap: true
-            }
+            },
         ],
         $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
         version: "1.4"
